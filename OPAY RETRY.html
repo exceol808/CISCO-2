@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN PAGE</title>
+    <link rel="icon" href="download.png">
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            background: linear-gradient(rgba(0, 128, 0, 0.7), rgba(0, 128, 0, 0.7)), url('./opay.png');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .login-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 350px;
+        }
+
+        .check {
+            text-align: center;
+        }
+
+        input[type="text"],
+        .password-container input {
+            width: 80%; /* Make the password field larger */
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .password-container button {
+            width: 15%; /* Make the Show/Hide button smaller */
+            padding: 10px;
+            margin-left: 5px;
+            border: none;
+            background-color: #ccc;
+            color: black;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px; /* Adjust font size to match the button size */
+        }
+
+        button {
+            width: 96%;
+            padding: 10px;
+            border: none; 
+            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
+            font-size: 17px;
+        }
+
+        .me {
+            text-align: left;
+        }
+
+        .password-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%; /* Ensure the entire container takes up full width */
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .remember-me input {
+            margin-right: 10px;
+        }
+
+        #loadingIndicator {
+            display: none;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1 class="check">OPAY</h1>
+        <h1 class="check">LOGIN TO OPAY DASHBOARD</h1>
+        <div class="me">Email address</div>
+        <input type="text" id="email" placeholder="Enter your email address" required>
+        <div class="me">Password</div>
+        <div class="password-container">
+            <input type="password" id="password" placeholder="Enter your password">
+            <button id="togglePassword">Show</button>
+        </div>
+        <div class="remember-me">
+            <input type="checkbox" id="rememberMe">
+            <label for="rememberMe">Remember Me</label>
+        </div>
+        <a href="#" id="them">forgot password?</a>
+        <button id="loginBtn">LOGIN</button>
+        <a href="opay2.html" id="clear">Sign up page</a>
+        <div id="loadingIndicator">Loading...</div>
+    </div>
+
+    <script>
+        // Toggle password visibility
+        document.getElementById("togglePassword").addEventListener("click", function() {
+            const passwordField = document.getElementById("password");
+            const toggleBtn = document.getElementById("togglePassword");
+
+            // Toggle between password visibility
+            if (passwordField.type === "password") {
+                passwordField.type = "text";  // Show password
+                toggleBtn.textContent = "Hide";  // Change button text to "Hide"
+            } else {
+                passwordField.type = "password";  // Hide password
+                toggleBtn.textContent = "Show";  // Change button text to "Show"
+            }
+        });
+
+        // JavaScript to handle the login button click
+        document.getElementById("loginBtn").addEventListener("click", function() {
+            // Retrieve values from the input fields
+            var email = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+            var rememberMe = document.getElementById("rememberMe").checked;
+            var loadingIndicator = document.getElementById("loadingIndicator");
+
+            // Email validation
+            var emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+            if (!email.match(emailPattern)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Conditional checks for specific feedback
+            if (email === "" && password === "") {
+                alert("Please fill in both email and password.");
+            } else if (email === "") {
+                alert("Please fill in your email.");
+            } else if (password === "") {
+                alert("Please fill in your password.");
+            } else {
+                // Show loading indicator
+                loadingIndicator.style.display = "block";
+                
+                // Simulate a delay for loading
+                setTimeout(function() {
+                    loadingIndicator.style.display = "none";
+                    alert("Email: " + email + "\nPassword: " + password + "\nRemember Me: " + rememberMe);
+
+                    // This is where you'd handle the login logic (e.g., send data to a server)
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
